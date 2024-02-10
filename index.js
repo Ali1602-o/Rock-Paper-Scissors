@@ -6,93 +6,87 @@ const LOSE_MSG = 'You Lost :(, Reload to try again !';
 const DRAW_MSG = "It's a Draw, Reload to try again !";
 const PLAYER_CHOICES = ['rock', 'paper', 'scissors'];
 
+
+function playGame() {
+    const rootElement = document.querySelector('#root');
+
+    const choicesContainer = document.createElement('div');
+    choicesContainer.classList.add('choices-container');
+    
+    const actionMessage = document.createElement('h2');
+    actionMessage.textContent = "Click on you choice :";
+    
+    const choicesList = document.createElement('ul');
+    
+    
+    addChoiceElements(choicesList);
+    
+    choicesContainer.appendChild(actionMessage);
+    
+    choicesContainer.appendChild(choicesList);
+    
+    rootElement.appendChild(choicesContainer);
+}
+
+
+
+
+function playRound(playerSelection) {    
+    //getComputer Selection
+    //compare to see who wins
+    //whether lose win or draw manipulate the dom to show result
+}
+
+
+function handlePlayerChoice() {
+    switch(this.id) {
+        case 'rock-choice': console.log('rock'); break;
+        case 'paper-choice': console.log('paper'); break;
+        case 'scissors-choice': console.log('scissors'); break;
+        default : break;
+    }
+}
+
+function addChoiceElements(choicesList) {
+
+    for (let i = 0; i < PLAYER_CHOICES.length; i++) {
+        const choiceContainer = document.createElement('li');
+        const choiceIcon = document.createElement('img');
+        const title = document.createElement('span');
+        choiceContainer.setAttribute('id' , `${PLAYER_CHOICES[i]}-choice`);
+        choiceIcon.classList.add('choice-img');
+        choiceIcon.setAttribute('src', `./assets/images/${PLAYER_CHOICES[i]}.png`);
+        choiceIcon.setAttribute('draggable', false);
+        title.textContent = captilizeFirstLetter(PLAYER_CHOICES[i]);
+
+    
+        choiceContainer.appendChild(choiceIcon);
+        choiceContainer.appendChild(title);
+
+        choiceContainer.addEventListener('click', handlePlayerChoice);
+
+        choicesList.appendChild(choiceContainer);
+    }
+    
+}
+
+
 function getComputerChoice() {    
     let randomIndex = Math.floor(Math.random() * 3); // random * (max (2) - min (0)) + min (0)
     return PLAYER_CHOICES[randomIndex]; 
 }
 
-function playRound(playerSelection, computerSelection) {    
-    if( playerSelection == computerSelection ) return DRAW_MSG;
-
-    let result = LOSE_MSG;
-
-    switch (playerSelection) {
-        case ( PLAYER_CHOICES [0] ) : computerSelection == PLAYER_CHOICES [2] ? result = WIN_MSG : result = LOSE_MSG; break;
-        case ( PLAYER_CHOICES [1] ) : computerSelection == PLAYER_CHOICES [0] ? result = WIN_MSG : result = LOSE_MSG; break;
-        case ( PLAYER_CHOICES [2] ) : computerSelection == PLAYER_CHOICES [1] ? result = WIN_MSG : result = LOSE_MSG; break;
-        default : result = INVALID_INPUT_MSG; break;
+function captilizeFirstLetter(word) {
+    let wordType = typeof word;
+    if (wordType == "string" ) {
+        let lowerCaseWord = word.toLowerCase();
+        let firstLetter = lowerCaseWord.substring(0,1).toUpperCase();
+        let restOfWord = lowerCaseWord.substr(1, lowerCaseWord.length - 1);
+        return firstLetter + restOfWord;
+    } else {
+        console.error("invalid parameter type, parameter : " + word);
     }
-    
-    return result;
-    
 }
 
-function playGame() {
-    
-    console.log(`<============== GAME STARTED =============>`);
-
-    let playerScore = 0;
-    let computerScore = 0;
-    
-
-    for (var i = 0; i < 5; i++ ) {
-        console.log(`------- Round ${i + 1} -------`);
-
-        const playerSelection = prompt(`
-        Write your choice : Rock | Paper | Scissors :
-                    ( YOU ) ${playerScore}  - ${computerScore} ( COMPUTER )
-                                Rounds Left : ${5 - i} 
-        `);
-        const computerSelection = getComputerChoice();
-        
-        
-        console.log("Your choice : " + playerSelection);
-        console.log("Computer choice : " + computerSelection);
-        
-        let result = playRound(playerSelection.toLowerCase(), computerSelection);
-
-        if (result == WIN_MSG) {
-            console.log('You Won this round !');
-            
-            alert('You Won this round ! Computer choose ' + computerSelection);
-            playerScore++;
-        } else if (result == LOSE_MSG) {
-            console.log('You lost this round !');
-            alert('You lost this round ! Computer choose ' + computerSelection);
-            computerScore++;
-        } else if(result == DRAW_MSG) {
-            console.log('Draw');
-            alert('Draw, Computer choose ' + computerSelection);
-        } else {
-            console.log(result);
-            alert( result + `
-            
-            
-                Reload the page to restart the game !`);
-            break;
-        }
-    }
-    
-    console.log(`------- FINAL SCORE -------`);
-    console.log(`( YOU ) ${playerScore}  - ${computerScore} ( COMPUTER )`);
-    let result = `
-    ( YOU ) ${playerScore}  - ${computerScore} ( COMPUTER )
-    `;
-    if (i == 5) {
-        if (playerScore == computerScore) {
-            console.log (DRAW_MSG);
-            result += DRAW_MSG;
-        } else if (playerScore > computerScore) {
-            console.log (WIN_MSG);
-            result += WIN_MSG;
-        } else {
-            console.log (LOSE_MSG);
-            result += LOSE_MSG;
-        }
-        alert(result);
-    }
-    console.log(`<==========================================>`);
-}
 
 playGame();
-
