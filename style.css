@@ -1,0 +1,146 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
+
+html {
+    box-sizing: border-box;
+    font-size: 16px;
+    font-family: 'Ubuntu', sans-serif;
+    height: 100%;
+}
+  
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+body, h1, h2, h3, h4, h5, h6, p, ol, ul {
+    margin: 0;
+    padding: 0;
+}  
+ol, ul {
+    list-style: none; 
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    /* justify-content: space-between; */
+    height: 100%;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+h1, h2 {
+    width: fit-content;
+    margin: auto; 
+    padding: 20px;
+}
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    height: 50%;
+}
+
+footer {
+    margin-top: auto;
+    text-align: center;
+}
+a {
+    text-decoration: none;
+    color: grey;
+}
+
+
+#root {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.choices-container > ul {
+    display: flex;
+    justify-content: center;
+    gap: 48px;
+    flex-wrap: wrap;
+    padding: 50px;
+}
+
+.choices-container li {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;   
+}
+
+.choices-container li:hover {
+    cursor: pointer;    
+}
+
+.choice-img {
+    width: 150px;
+    height: 150px;
+}
+.result-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.result-container > ul {
+    display: flex;
+    justify-content: center;
+    gap: 48px;
+    flex-wrap: wrap;
+    padding: 50px;
+}
+
+.result-container li {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;   
+}
+
+
+.primary-btn {
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  text-decoration: none;
+  /* text-transform: uppercase; */
+  color: #000;
+  cursor: pointer;
+  border: 3px solid;
+  border-radius: 5px;
+  padding: 0.25em 0.5em;
+  width: fit-content;
+  margin:auto;
+  background-color: white;
+  box-shadow: 1px 1px 0px 0px, 2px 2px 0px 0px, 3px 3px 0px 0px, 4px 4px 0px 0px, 5px 5px 0px 0px;
+  position: relative;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.primary-btn:active {
+  box-shadow: 0px 0px 0px 0px;
+  top: 5px;
+  left: 5px;
+}
+
+.final-score {
+    height: 150px;
+    padding: 50px;
+}
+
+.game-desc {
+    text-align: center;
+}
